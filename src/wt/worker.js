@@ -4,6 +4,8 @@ import { parentPort } from 'worker_threads';
 // Sort in ascending order
 // Send back to main thread
 
-parentPort.on('message', (data) => {
-  // Write your code here
+parentPort.once('message', (data) => {
+  const sorted = [...data].sort((a, b) => a - b);
+  parentPort.postMessage(sorted);
+  parentPort.close();
 });
